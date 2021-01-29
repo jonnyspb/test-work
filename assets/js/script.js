@@ -49,6 +49,10 @@ jQuery(document).ready(function($) {
             action:'users_table_ajax',
             role:role,
         };
+        $users_table.attr('data-sortby','display_name');
+        $users_table.attr('data-sort','ASC');
+        $( "[data-orderby=email]" ).removeClass( "active" );
+        $( "[data-orderby=display_name]" ).addClass( "active" );
         $users_table.attr('data-role', role );
         $.post(ajax_front.url, data, function ( response ) {
             $table_body.html( response );
