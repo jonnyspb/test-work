@@ -2,39 +2,42 @@ jQuery(document).ready(function($) {
     let $users_table = $( '#users_table' ),
         $table_body = $( '.section--table_body' );
     $( '#users_table .icon--sort' ).on('click', function ( e ) {
-        let order = $( this ).attr('order' );
-        let orderby = $( this ).attr('orderby' );
-            if ( order == "ASC" ) {
-                order = "DESC";
-                $( this ).attr( "order" , order );
-            }
-            else if ( order == "DESC" ) {
-                order = "ASC";
-                $( this ).attr( "order" , order );
-            }
-        $users_table.attr('sortby', orderby );
-        $users_table.attr('sort', order );
+        let order = $( this ).attr('data-order' );
+        let orderby = $( this ).attr('data-orderby' );
+
+        if ( order == "ASC" ) {
+            order = "DESC";
+            $( this ).attr( "data-order" , order );
+        }
+        else if ( order == "DESC" ) {
+            order = "ASC";
+            $( this ).attr( "data-order" , order );
+        }
+        $( "[data-orderby=" + $users_table.attr('data-sortby') + "]" ).removeClass( "active" );
+        $( this ).addClass( "active" );
+        $users_table.attr('data-sortby', orderby );
+        $users_table.attr('data-sort', order );
         let data = {
             action:'users_table_ajax',
-            page:$users_table.attr('page') || 1,
+            page:$users_table.attr('data-page') || 1,
             order:order,
             orderby:orderby,
-            role:$users_table.attr('role'),
+            role:$users_table.attr('data-role'),
         };
         $.post( ajax_front.url, data, function ( response ) {
             $table_body.html(response);
         });
     });
     $( '#users_table .section--table_body' ).on('click', function ( e ) {
-        let page = $( e.target ).attr('page' );
+        let page = $( e.target ).attr('data-page' );
         let data = {
             action:'users_table_ajax',
             page:page,
-            order:$users_table.attr('sort'),
-            orderby:$users_table.attr('sortby' ),
-            role:$users_table.attr('role' ),
+            order:$users_table.attr('data-sort'),
+            orderby:$users_table.attr('data-sortby' ),
+            role:$users_table.attr('data-role' ),
         };
-        $users_table.attr('page', page );
+        $users_table.attr('data-page', page );
 
         $.post( ajax_front.url, data, function ( response ) {
             $table_body.html( response );
@@ -46,7 +49,7 @@ jQuery(document).ready(function($) {
             action:'users_table_ajax',
             role:role,
         };
-        $users_table.attr('role', role );
+        $users_table.attr('data-role', role );
         $.post(ajax_front.url, data, function ( response ) {
             $table_body.html( response );
         });

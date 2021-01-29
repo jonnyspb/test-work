@@ -55,15 +55,16 @@
     font-weight: bold;
 }
 .section--table_header .section--table_col.icon--sort:hover {
-    background-size: 25px;
     color: grey;
 }
-
+.section--col_icon svg{
+    width: 15px;
+}
 .icon--sort{
-    background: url('https://api.iconify.design/bx:bxs-sort-alt.svg?color=grey') no-repeat center center / contain;
-    background-size: 25px;
-    background-position: center right;
     cursor: pointer;
+}
+.icon--sort.active {
+    color: grey;
 }
 .section--table_row {
     display: -webkit-box;
@@ -76,6 +77,9 @@
     padding: 16px 20px;
     text-align: left;
     min-width: 230px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .section--paginations {
     display: -webkit-box;

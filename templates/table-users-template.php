@@ -44,7 +44,7 @@ else {
 		            $active = 'active';
 		        }
 		        else $active = '';
-		        echo '<div class="section--pagination_page '.$active.'" page="' . $i . '">' . $i . '</div>';
+		        echo '<div class="section--pagination_page '.$active.'" data-page="' . $i . '">' . $i . '</div>';
 	    } ?>
     </div>
 <?php }
