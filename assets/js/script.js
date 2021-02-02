@@ -1,6 +1,7 @@
 jQuery(document).ready(function($) {
     let $users_table = $( '#users_table' ),
         $table_body = $( '.section--table_body' );
+        $nonce = ajax_front.nonce;
     $( '#users_table .icon--sort' ).on('click', function ( e ) {
         let order = $( this ).attr('data-order' );
         let orderby = $( this ).attr('data-orderby' );
@@ -23,6 +24,7 @@ jQuery(document).ready(function($) {
             order:order,
             orderby:orderby,
             role:$users_table.attr('data-role'),
+            nonce_code : $nonce,
         };
         $.post( ajax_front.url, data, function ( response ) {
             $table_body.html(response);
@@ -36,6 +38,7 @@ jQuery(document).ready(function($) {
             order:$users_table.attr('data-sort'),
             orderby:$users_table.attr('data-sortby' ),
             role:$users_table.attr('data-role' ),
+            nonce_code : $nonce
         };
         $users_table.attr('data-page', page );
 
@@ -48,6 +51,7 @@ jQuery(document).ready(function($) {
         let data = {
             action:'users_table_ajax',
             role:role,
+            nonce_code : $nonce
         };
         $users_table.attr('data-sortby','display_name');
         $users_table.attr('data-sort','ASC');
